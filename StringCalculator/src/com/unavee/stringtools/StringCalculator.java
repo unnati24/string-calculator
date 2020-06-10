@@ -1,5 +1,6 @@
 package com.unavee.stringtools;
 
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -18,6 +19,7 @@ public class StringCalculator {
 				array = matchDelimiterRegex(numbers);
 			} else 
 				array = splitInputWithDelimiter(numbers);
+			
 			return sumOfIntegers(array);
 		}
 			
@@ -37,12 +39,27 @@ public class StringCalculator {
 
 	private int sumOfIntegers(String[] array) {
 		int sum = 0;
+		ArrayList<Integer> negativeInt = new ArrayList<Integer>();
 		
 		for(int i = 0; i < array.length; i++) {
 			int value = toInteger(array[i]);
+			
+			if(value < 0) {
+				negativeInt.add(value);
+				value = 0;
+			}
+			
 			sum += value;
 		}
+		
+		filterNegativeInteger(negativeInt);
+		
 		return sum;
+	}
+
+	private void filterNegativeInteger(ArrayList<Integer> negativeInt) {
+		if(negativeInt.size() > 0)
+			throw new IllegalArgumentException("Negatives are not allowed " + negativeInt);
 	}
 	
 	private static int toInteger(String number) {
