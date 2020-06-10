@@ -8,10 +8,14 @@ public class StringCalculator {
 		else if (numbers.length() == 1)
 			return toInteger(numbers);
 		else {
-			String[] array = numbers.split(",");
+			String[] array = splitInputWithDelimiter(numbers);
 			return sumOfIntegers(array);
 		}
 			
+	}
+
+	private String[] splitInputWithDelimiter(String numbers) {
+		return numbers.split(",|\n");
 	}
 
 	private int sumOfIntegers(String[] array) {
