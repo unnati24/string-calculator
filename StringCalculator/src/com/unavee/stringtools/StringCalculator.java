@@ -10,20 +10,25 @@ public class StringCalculator {
 	public int add(String numbers) {
 		if(numbers.length() == 0)
 			return 0;
+		
 		else if (numbers.length() == 1)
 			return toInteger(numbers);
+		
 		else {
-			
-			String[] array;
-			
-			if(numbers.startsWith("//")) {
-				array = matchDelimiterRegex(numbers);
-			} else 
-				array = splitInputWithDelimiter(numbers);
-			
+			String[] array = checkInputString(numbers);
 			return sumOfIntegers(array);
 		}
-			
+	}
+
+
+
+	private String[] checkInputString(String numbers) {
+		String[] array;
+		if(numbers.startsWith("//")) {
+			array = matchDelimiterRegex(numbers);
+		} else 
+			array = splitInputWithDelimiter(numbers);
+		return array;
 	}
 
 	
