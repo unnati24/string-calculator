@@ -47,5 +47,11 @@ public class StringCalculatorTest {
 		calculator.add("-1,2");
 		calculator.add("-1,-2,-4");
 	}
+	
+	@Test
+	public void testStringWithIntegersGreaterThanLimit() {
+		assertEquals(3, calculator.add("1001,3"));
+		calculator.add("10,1004\n4");
+	}
 
 }

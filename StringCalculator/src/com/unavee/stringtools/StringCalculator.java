@@ -47,8 +47,9 @@ public class StringCalculator {
 			if(value < 0) {
 				negativeInt.add(value);
 				value = 0;
-			}
-			
+			} else if(isNumberGreaterThanLimit(value))
+				value = 0;
+				
 			sum += value;
 		}
 		
@@ -57,6 +58,13 @@ public class StringCalculator {
 		return sum;
 	}
 
+	private boolean isNumberGreaterThanLimit(int num) {
+		if(num > 1000)
+			return true;
+		
+		return false;
+	}
+	
 	private void filterNegativeInteger(ArrayList<Integer> negativeInt) {
 		if(negativeInt.size() > 0)
 			throw new IllegalArgumentException("Negatives are not allowed " + negativeInt);
