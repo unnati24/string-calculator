@@ -59,4 +59,16 @@ public class StringCalculatorTest {
 		assertEquals(6, calculator.add("//[***]\n1***2***3"));
 		assertEquals(6, calculator.add("//[????]\n1????2????3"));
 	}
+	
+	@Test
+	public void testForMultipleDelimiters() {
+		assertEquals(6, calculator.add("//[*][%]\n1*2%3"));
+		assertEquals(4, calculator.add("//[.][%]\n1%2000.3"));
+	}
+	
+	@Test
+	public void testForMultipleDelimitersWithLengthLongerThanOne() {
+		assertEquals(6, calculator.add("//[**][%%]\n1**2%%3"));
+		assertEquals(3, calculator.add("//[...][%]\n1%2...3000"));
+	}
 }

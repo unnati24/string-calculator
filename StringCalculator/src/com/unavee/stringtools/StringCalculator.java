@@ -1,6 +1,7 @@
 package com.unavee.stringtools;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -25,6 +26,8 @@ public class StringCalculator {
 			
 	}
 
+	
+	
 	private String[] matchDelimiterRegex(String numbers) {
 		String delimiter;
 		Matcher match = Pattern.compile("//(\\[(.*?)\\]|(.*))\\n(.*)").matcher(numbers);
@@ -35,10 +38,31 @@ public class StringCalculator {
 		} 
 		else {
 			delimiter = match.group(2);
+			if(delimiter.contains("][")) 
+					return splitInputWithMultipleDelimiter(match);
 		}
 		return match.group(4).split(Pattern.quote(delimiter));
 	}
 
+
+
+	private String[] splitInputWithMultipleDelimiter(Matcher match) {
+		
+		String[] delimiterArr;
+			
+		delimiterArr =match.group(2).split("\\]\\[");
+		String delimiterStr = "";
+		
+		for(int i = 0; i < delimiterArr.length; i++) {
+			
+			delimiterStr += delimiterArr[i] + "|";
+		}
+		delimiterStr = delimiterStr.replaceAll("[\\<\\(\\[\\{\\\\\\^\\-\\=\\$\\!\\]\\}\\)\\?\\*\\+\\.\\>]", "\\\\$0");
+		return match.group(4).split(delimiterStr.substring(0, delimiterStr.length() - 1));
+	}
+
+	
+	
 	private String[] splitInputWithDelimiter(String numbers) {
 		return numbers.split(",|\n");
 	}
@@ -77,6 +101,9 @@ public class StringCalculator {
 	}
 	
 	private static int toInteger(String number) {
+		if(number.isEmpty())
+			return 0;
+		
 		return Integer.parseInt(number);
 	}
 
