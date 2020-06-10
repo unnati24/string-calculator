@@ -22,5 +22,11 @@ public class StringCalculatorTest {
 	public void testForTwoIntegers() {
 		assertEquals(3, calculator.add("1,2"));
 	}
+	
+	@Test
+	public void testForUnkownNumberOfIntegers() {
+		assertEquals(6, calculator.add("1,2,3"));
+		assertEquals(20, calculator.add("1,2,3,10,4"));
+	}
 
 }
