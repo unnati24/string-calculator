@@ -54,4 +54,9 @@ public class StringCalculatorTest {
 		calculator.add("10,1004\n4");
 	}
 
+	@Test
+	public void testForAnyDelimiterPattern() {
+		assertEquals(6, calculator.add("//[***]\n1***2***3"));
+		assertEquals(6, calculator.add("//[????]\n1????2????3"));
+	}
 }

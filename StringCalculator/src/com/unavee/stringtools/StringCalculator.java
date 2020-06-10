@@ -27,10 +27,16 @@ public class StringCalculator {
 
 	private String[] matchDelimiterRegex(String numbers) {
 		String delimiter;
-		Matcher match = Pattern.compile("//(.*)\n(.*)").matcher(numbers);
+		Matcher match = Pattern.compile("//(\\[(.*?)\\]|(.*))\\n(.*)").matcher(numbers);
 		match.matches();
-		delimiter = match.group(1);
-		return match.group(2).split(Pattern.quote(delimiter));
+		
+		if(match.group(2) == null) {
+			delimiter = match.group(3);
+		} 
+		else {
+			delimiter = match.group(2);
+		}
+		return match.group(4).split(Pattern.quote(delimiter));
 	}
 
 	private String[] splitInputWithDelimiter(String numbers) {
