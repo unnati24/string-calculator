@@ -6,11 +6,21 @@ import org.junit.Test;
 
 public class StringCalculatorTest {
 
+	StringCalculator calculator = new StringCalculator();
+	
 	@Test
 	public void testForEmptyString() {
-		StringCalculator calculator = new StringCalculator();
-		int res = calculator.add("");
-		assertEquals(0, res);
+		assertEquals(0, calculator.add(""));
+	}
+	
+	@Test
+	public void testForSingleInteger() {
+		assertEquals(1, calculator.add("1"));
+	}
+	
+	@Test
+	public void testForTwoIntegers() {
+		assertEquals(3, calculator.add("1,2"));
 	}
 
 }
