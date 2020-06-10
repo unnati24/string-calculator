@@ -1,5 +1,8 @@
 package com.unavee.stringtools;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class StringCalculator {
 
 	public int add(String numbers) {
@@ -8,10 +11,24 @@ public class StringCalculator {
 		else if (numbers.length() == 1)
 			return toInteger(numbers);
 		else {
-			String[] array = splitInputWithDelimiter(numbers);
+			
+			String[] array;
+			
+			if(numbers.startsWith("//")) {
+				array = matchDelimiterRegex(numbers);
+			} else 
+				array = splitInputWithDelimiter(numbers);
 			return sumOfIntegers(array);
 		}
 			
+	}
+
+	private String[] matchDelimiterRegex(String numbers) {
+		String delimiter;
+		Matcher match = Pattern.compile("//(.*)\n(.*)").matcher(numbers);
+		match.matches();
+		delimiter = match.group(1);
+		return match.group(2).split(Pattern.quote(delimiter));
 	}
 
 	private String[] splitInputWithDelimiter(String numbers) {

@@ -35,5 +35,11 @@ public class StringCalculatorTest {
 		assertEquals(6, calculator.add("1\n2\n3"));
 		assertEquals(14, calculator.add("1\n2,3\n8"));
 	}
+	
+	@Test
+	public void testForAnyDelimiter() {
+		assertEquals(3, calculator.add("//;\n1;2"));
+		assertEquals(6, calculator.add("//*\n1*2*3"));
+	}
 
 }
